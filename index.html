@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Product Page</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f3f3f3}
+
+/* HEADER */
+header{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 30px;background:#232f3e;color:#fff
+}
+.logo{font-size:22px;font-weight:bold}
+.search-bar{flex:1;padding:9px;border-radius:4px;border:none}
+.search-btn{padding:9px 16px;background:#febd69;border:none;font-weight:bold}
+.cart{margin-left:auto;font-weight:bold}
+
+/* MAIN */
+main{max-width:1150px;margin:30px auto;padding:20px}
+.product-container{
+  display:flex;gap:40px;background:#fff;padding:25px;
+  border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.12)
+}
+
+/* IMAGE + ZOOM */
+.product-images{flex:1}
+.img-zoom{
+  overflow:hidden;border-radius:8px;border:1px solid #ddd;
+  max-width:420px
+}
+#main-image{
+  width:100%;transition:transform .3s ease
+}
+.img-zoom:hover #main-image{
+  transform:scale(1.4)
+}
+
+.thumbnail-images{
+  display:flex;gap:12px;margin-top:12px
+}
+.thumbnail-images img{
+  width:65px;height:65px;object-fit:cover;
+  cursor:pointer;border-radius:4px;
+  border:2px solid transparent
+}
+.thumbnail-images img.active,
+.thumbnail-images img:hover{
+  border:2px solid #febd69
+}
+
+/* DETAILS */
+.product-details{flex:1}
+.product-title{font-size:28px;margin-bottom:10px}
+.product-rating{color:#f0a500;margin-bottom:10px}
+.product-price{font-size:26px;color:#b12704;margin-bottom:15px}
+.product-description{margin-bottom:18px;line-height:1.6}
+
+.add-cart{
+  padding:12px 22px;
+  background:#ffd814;border:none;
+  font-size:16px;font-weight:bold;
+  cursor:pointer;border-radius:6px
+}
+.add-cart:hover{background:#f7ca00}
+
+footer{
+  text-align:center;padding:15px;
+  background:#232f3e;color:#fff;margin-top:40px
+}
+
+@media(max-width:900px){
+  .product-container{flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Amazon Clone</div>
+  <input type="text" class="search-bar" placeholder="Search products...">
+  <button class="search-btn">Search</button>
+  <div class="cart">🛒 Cart: <span id="cartCount">0</span></div>
+</header>
+
+<main>
+<div class="product-container">
+
+  <div class="product-images">
+    <div class="img-zoom">
+      <img id="main-image" src="product.jpg" alt="Product">
+    </div>
+
+    <div class="thumbnail-images">
+      <img src="thumb1.jpg" class="active" onclick="changeImage(this)">
+      <img src="thumb2.png" onclick="changeImage(this)">
+      <img src="thumb3.jpg" onclick="changeImage(this)">
+    </div>
+  </div>
+
+  <div class="product-details">
+    <h1 class="product-title">Awesome Product Name</h1>
+    <p class="product-rating">⭐⭐⭐⭐☆ (120 reviews)</p>
+    <p class="product-price">$200.99</p>
+
+    <p class="product-description">
+      Premium quality product with modern design and strong durability.
+    </p>
+
+    <ul>
+      <li>High-quality material</li>
+      <li>1 year warranty</li>
+      <li>Multiple colors available</li>
+    </ul>
+
+    <br>
+    <button class="add-cart" onclick="addToCart()">Add to Cart</button>
+  </div>
+
+</div>
+</main>
+
+<footer>
+© 2026 Amazon Clone. All rights reserved.
+</footer>
+
+<script>
+let cart = 0;
+
+function changeImage(el){
+  document.getElementById("main-image").src = el.src;
+  document.querySelectorAll(".thumbnail-images img")
+    .forEach(i => i.classList.remove("active"));
+  el.classList.add("active");
+}
+
+function addToCart(){
+  cart++;
+  document.getElementById("cartCount").innerText = cart;
+}
+</script>
+
+</body>
+</html>
